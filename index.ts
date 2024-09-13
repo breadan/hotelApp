@@ -1,5 +1,5 @@
 import express from 'express';
-import prisma from './prisma';
+import userRouter from './src/router/user.route';
 
 const app = express();
 
@@ -9,11 +9,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.use('/users', (req, res) => {
-  prisma.user.findMany().then((users) => {
-    res.json(users);
-  });
-});
+app.use('/users', userRouter);
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
